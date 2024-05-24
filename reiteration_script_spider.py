@@ -66,7 +66,7 @@ for i in range(len(list_programmes)) :
     df_prog = data_final[data_final['Programme']==list_programmes[i]].copy()
     list_dataframes.append(df_prog)
 
-# triage des données par le nombre de jour de réitération choisi
+# triage des données par le nombre de jour de réitération choisie
 def triage(data_final) :
     pd.options.mode.copy_on_write = True
     reiteration = data_final['date'].unique()
@@ -125,7 +125,7 @@ for i in range(len(list_dataframes)) :
     resultat_par_programme[i] = resultat(reiteration_par_programme[i])
     resultat_par_programme[i]['Called'] = list_programmes[i]
 
-# exporation du résultat dans un fichier excel
+# exportation du résultat dans un fichier excel
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill, Border, Side, Alignment, Font
 data_finals = data_final.drop(columns=['date'])
