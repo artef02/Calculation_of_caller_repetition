@@ -66,7 +66,7 @@ for i in range(len(list_programmes)) :
     df_prog = data_final[data_final['Programme']==list_programmes[i]].copy()
     list_dataframes.append(df_prog)
 
-# triage des données par le nombre de jour de réitération choisie
+# triage des données par le nombre de jour de réitération choisi
 def triage(data_final) :
     pd.options.mode.copy_on_write = True
     reiteration = data_final['date'].unique()
