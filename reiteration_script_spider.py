@@ -162,18 +162,3 @@ with pd.ExcelWriter("C:\\Users\\sst\\Downloads\\REITERATION\\"+nom_du_fichier+".
         sheet = workbook[sheet_name]
         apply_styles(sheet)
         standardize_cell_sizes(sheet)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
