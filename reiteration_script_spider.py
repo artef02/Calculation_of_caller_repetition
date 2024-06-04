@@ -128,6 +128,23 @@ for i in range(len(list_dataframes)) :
 # exportation du résultat dans un fichier excel
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill, Border, Side, Alignment, Font
+
+def rgb_to_hex(rgb):
+    return '{:02X}{:02X}{:02X}'.format(*rgb)
+header_bg_color = rgb_to_hex((255, 102, 0))
+
+def apply_styles(sheet):
+    for cell in sheet[1]:
+        cell.font = Font(name='Arial', size=10, bold=True)
+        cell.fill = PatternFill(start_color=header_bg_color, end_color=header_bg_color, fill_type="solid")
+
+def standardize_cell_sizes(sheet, column_width=20, row_height=15):
+    for col in sheet.columns:
+        col_letter = col[0].column_letter
+        sheet.column_dimensions[col_letter].width = column_width
+    for row in sheet.rows:
+        sheet.row_dimensions[row[0].row].height = row_height
+
 data_finals = data_final.drop(columns=['date'])
 with pd.ExcelWriter("C:\\Users\\sst\\Downloads\\REITERATION\\"+nom_du_fichier+".xlsx") as writer :
     data_finals.to_excel(writer, sheet_name='Data',index=False)
@@ -137,6 +154,14 @@ with pd.ExcelWriter("C:\\Users\\sst\\Downloads\\REITERATION\\"+nom_du_fichier+".
     top_callers.to_excel(writer,sheet_name='top_calls_Details',index=False)
     for i in range(len(resultat_par_programme)) :
         resultat_par_programme[i].to_excel(writer,sheet_name=list_programmes[i],index=True)
+        
+    workbook = writer.book
+    sheets = workbook.sheetnames
+
+    for sheet_name in sheets:
+        sheet = workbook[sheet_name]
+        apply_styles(sheet)
+        standardize_cell_sizes(sheet)
 
 
 
